@@ -11,6 +11,7 @@ using MoneyService.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MoneyService.Models;
 
 
 namespace MoneyService
@@ -60,6 +61,8 @@ namespace MoneyService
             });
             
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ITransactionService, TransactionService>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)

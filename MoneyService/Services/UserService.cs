@@ -14,10 +14,6 @@ namespace MoneyService.Services
         User Authenticate(string email, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
-        Account CreateAccount(Account account);
-        IEnumerable<Account> GetUserAccounts(int userId);
-        IEnumerable<Transaction> GetUserTransactions(int userId);
-        Transaction Refill(Transaction account);
         User Create(User user, string password);
         void Update(User userParam, string password = null);
         void Delete(int id);
@@ -123,67 +119,7 @@ namespace MoneyService.Services
                 _context.SaveChanges();
             }
         }
-
-        public Account CreateAccount(Account account)
-        {
-            string firstNumber = "4";
-            
-            do
-            {
-                Random rnd = new Random();
-                int rndNumber = rnd.Next(100000000, 999999999);
-                account.Number = String.Concat(firstNumber, rndNumber.ToString());
-            } while (_context.Accounts.Any(x => x.Number == account.Number));
-
-            account.Balance = 0.00;
-            account.Closing = false;
-
-            _context.Accounts.Add(account);
-            _context.SaveChanges();
-
-            return account;
-        }
-
-        public Transaction Refill(Transaction transaction)
-        {
-            if (transaction.NumberAccountOne == null)
-                throw new AppException("Введите номер счета");
-            
-            var account1 = _context.Accounts.FirstOrDefault(x => x.Number == transaction.NumberAccountOne);
-            var account2 = _context.Accounts.FirstOrDefault(x => x.Number == transaction.NumberAccountTwo);
-            
-            if (account1 == null)
-                throw new AppException("Счета с таким номером не существует");
-            
-            if (account2 == null)
-                account1.Balance += transaction.SumTransfer;
-            else
-            {
-                if (transaction.SumTransfer > account1.Balance)
-                    throw new AppException("На счету недостаточно средств");
-                account1.Balance -= transaction.SumTransfer;
-                account2.Balance += transaction.SumTransfer;
-            }
-            
-            transaction.UserId = account1.Id;
-            transaction.Date = DateTime.Now;
-
-            _context.Transactions.Add(transaction);
-            _context.SaveChanges();
-
-            return transaction;
-        }
-
-        public IEnumerable<Account> GetUserAccounts(int userId)
-        {
-            return _context.Accounts.Where(x => x.UserId == userId);
-        }
-
-        public IEnumerable<Transaction> GetUserTransactions(int userId)
-        {
-            return _context.Transactions.Where(x => x.UserId == userId);
-        }
-
+        
         private static void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
         {
             passwordSalt = Guid.NewGuid().ToString().Substring(0, 8);

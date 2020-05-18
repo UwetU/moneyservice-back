@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using MoneyService.Entities;
 
-namespace MoneyService.Models
+namespace MoneyService.Models.Accounts
 {
     public class AccountModel
     {

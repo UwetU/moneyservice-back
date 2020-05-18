@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mEsHGZWtOa3tAwPOj9QcOr7GW9+S/QgYS8/fgk377q1X0Wn+xZehdHo40g8ncHZ2VZYN5CXghhuE5fjLC1Sd1g==",
+  "dgSpecHash": "jeAoSssYqsZ5iydiuReSc6wKTlSIGNen80jTO0AIz+DiYaVS4zhwYQKJtYMAMUYuxpfb7BEcbAPoNf80eIqQ+w==",
   "success": true,
-  "projectFilePath": "D:\\modulebank\\MoneyService\\MoneyService.csproj",
+  "projectFilePath": "D:\\moneyservice-back\\MoneyService\\MoneyService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Пётр\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Пётр\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",

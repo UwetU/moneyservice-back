@@ -5014,11 +5014,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\modulebank\\MoneyService\\MoneyService.csproj",
+      "projectUniqueName": "D:\\moneyservice-back\\MoneyService\\MoneyService.csproj",
       "projectName": "MoneyService",
-      "projectPath": "D:\\modulebank\\MoneyService\\MoneyService.csproj",
+      "projectPath": "D:\\moneyservice-back\\MoneyService\\MoneyService.csproj",
       "packagesPath": "C:\\Users\\Пётр\\.nuget\\packages\\",
-      "outputPath": "D:\\modulebank\\MoneyService\\obj\\",
+      "outputPath": "D:\\moneyservice-back\\MoneyService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

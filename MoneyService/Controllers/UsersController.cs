@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using MoneyService.Helpers;
 using Microsoft.Extensions.Options;
 using System.Text;
@@ -12,7 +11,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using MoneyService.Services;
 using MoneyService.Entities;
-using MoneyService.Models;
 using MoneyService.Models.Users;
 
 namespace MoneyService.Controllers
@@ -77,23 +75,20 @@ namespace MoneyService.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody]RegisterModel model)
         {
-            // map model to entity
             var user = _mapper.Map<User>(model);
 
             try
             {
-                // create user
                 _userService.Create(user, model.Password);
                 return Ok();
             }
             catch (AppException ex)
             {
-                // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
         }
 
-        [AllowAnonymous]
+        /*[AllowAnonymous]
         [HttpPost("addAccount")]
         public IActionResult AddAccount()
         {
@@ -109,9 +104,9 @@ namespace MoneyService.Controllers
             {
                 return BadRequest(new {message = ex.Message});
             }
-        }
+        }*/
         
-        [AllowAnonymous]
+        /*[AllowAnonymous]
         [HttpPost("refillAccount")]
         public IActionResult RefillAccount([FromBody] TransactionModel model)
         {
@@ -126,7 +121,7 @@ namespace MoneyService.Controllers
             {
                 return BadRequest(new {message = ex.Message});
             }
-        }
+        }*/
 
         [HttpGet]
         public IActionResult GetAll()
@@ -143,22 +138,22 @@ namespace MoneyService.Controllers
             var model = _mapper.Map<UserModel>(user);
             return Ok(model);
         }
-
-        [HttpGet("accounts/{userId}")]
+    
+        /*[HttpGet("accounts/{userId}")]
         public IActionResult GetUserAccounts(int userId)
         {
             var accounts = _userService.GetUserAccounts(userId);
             var model = _mapper.Map<IList<AccountModel>>(accounts);
             return Ok(model);
-        }
+        }*/
 
-        [HttpGet("transactions/{userId}")]
+        /*[HttpGet("transactions/{userId}")]
         public IActionResult GetUserTransactions(int userId)
         {
             var accounts = _userService.GetUserTransactions(userId);
             var model = _mapper.Map<IList<TransactionModel>>(accounts);
             return Ok(model);
-        }
+        }*/
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UpdateModel model)
@@ -184,7 +179,7 @@ namespace MoneyService.Controllers
             return Ok();
         }
         
-        public int GetUserId()
+        /*public int GetUserId()
         {
             var userId = HttpContext.User?.Claims?.FirstOrDefault(p => p.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -194,6 +189,6 @@ namespace MoneyService.Controllers
             }
 
             return int.Parse(userId);
-        }
+        }*/
     }
 }
