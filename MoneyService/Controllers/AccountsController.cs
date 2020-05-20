@@ -12,7 +12,7 @@ using MoneyService.Services;
 namespace MoneyService.Controllers
 {
     [Authorize]
-    [ApiController]
+    [ApiController]    
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {

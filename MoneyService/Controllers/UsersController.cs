@@ -80,48 +80,13 @@ namespace MoneyService.Controllers
             try
             {
                 _userService.Create(user, model.Password);
-                return Ok();
+                return Ok(user);
             }
             catch (AppException ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
         }
-
-        /*[AllowAnonymous]
-        [HttpPost("addAccount")]
-        public IActionResult AddAccount()
-        {
-            var account = new Account();
-            account.UserId = GetUserId();
-
-            try
-            {
-                _userService.CreateAccount(account);
-                return Ok();
-            }
-            catch (AppException ex)
-            {
-                return BadRequest(new {message = ex.Message});
-            }
-        }*/
-        
-        /*[AllowAnonymous]
-        [HttpPost("refillAccount")]
-        public IActionResult RefillAccount([FromBody] TransactionModel model)
-        {
-            var transaction = _mapper.Map<Transaction>(model);
-
-            try
-            {
-                _userService.Refill(transaction);
-                return Ok();
-            }
-            catch (AppException ex)
-            {
-                return BadRequest(new {message = ex.Message});
-            }
-        }*/
 
         [HttpGet]
         public IActionResult GetAll()
@@ -138,22 +103,6 @@ namespace MoneyService.Controllers
             var model = _mapper.Map<UserModel>(user);
             return Ok(model);
         }
-    
-        /*[HttpGet("accounts/{userId}")]
-        public IActionResult GetUserAccounts(int userId)
-        {
-            var accounts = _userService.GetUserAccounts(userId);
-            var model = _mapper.Map<IList<AccountModel>>(accounts);
-            return Ok(model);
-        }*/
-
-        /*[HttpGet("transactions/{userId}")]
-        public IActionResult GetUserTransactions(int userId)
-        {
-            var accounts = _userService.GetUserTransactions(userId);
-            var model = _mapper.Map<IList<TransactionModel>>(accounts);
-            return Ok(model);
-        }*/
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UpdateModel model)
@@ -178,17 +127,5 @@ namespace MoneyService.Controllers
             _userService.Delete(id);
             return Ok();
         }
-        
-        /*public int GetUserId()
-        {
-            var userId = HttpContext.User?.Claims?.FirstOrDefault(p => p.Type == ClaimTypes.NameIdentifier)?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new AppException("UserId пуст");
-            }
-
-            return int.Parse(userId);
-        }*/
     }
 }
